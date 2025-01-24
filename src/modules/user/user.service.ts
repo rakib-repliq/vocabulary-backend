@@ -26,7 +26,10 @@ const updateUserRoleInDatabase = async (id: string, role: string) => {
 
 // Delete a user from the database
 const deleteUserFromDatabase = async (id: string) => {
-  const result = await User.findByIdAndDelete({ _id: id })
+  const result = await User.findByIdAndDelete(
+    { _id: id },
+    { select: '-password' },
+  )
   return result
 }
 
