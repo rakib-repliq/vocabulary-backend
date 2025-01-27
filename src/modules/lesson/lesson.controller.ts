@@ -37,8 +37,20 @@ const deleteLesson = catchAsync(async (req, res) => {
   })
 })
 
+const updateLesson = catchAsync(async (req, res) => {
+  const lesson = await LessonService.updateLesson(req.params.id, req.body)
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Lesson updated successfully',
+    data: lesson,
+  })
+})
+
 export const LessonController = {
-  createLesson: createLesson,
-  readAllLessons: readAllLessons,
-  deleteLesson: deleteLesson,
+  createLesson,
+  readAllLessons,
+  deleteLesson,
+  updateLesson,
 }

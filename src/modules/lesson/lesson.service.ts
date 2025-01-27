@@ -16,8 +16,14 @@ const deleteLessonFromDB = async (id: string) => {
   return lesson
 }
 
+const updateLessonIntoDB = async (id: string, payload: Partial<TLesson>) => {
+  const lesson = await Lesson.findByIdAndUpdate(id, payload, { new: true })
+  return lesson
+}
+
 export const LessonService = {
   createLesson: createLessonIntoDB,
   readAllLesson: readAllLessonsFromDB,
   deleteLesson: deleteLessonFromDB,
+  updateLesson: updateLessonIntoDB,
 }

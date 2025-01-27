@@ -1,4 +1,4 @@
-import { number, z } from 'zod'
+import { z } from 'zod'
 
 export const lessonCreateValidation = z.object({
   lessonName: z
@@ -10,10 +10,11 @@ export const lessonCreateValidation = z.object({
       message: 'Lesson Name must be at least 2 characters',
     })
     .max(255),
-  lessonNumber: number({
-    required_error: 'Lesson Number is required',
-    invalid_type_error: 'Lesson Number must be a number',
-  })
+  lessonNumber: z
+    .number({
+      required_error: 'Lesson Number is required',
+      invalid_type_error: 'Lesson Number must be a number',
+    })
     .int()
     .positive(),
   level: z.enum(['easy', 'medium', 'hard'], {
@@ -22,3 +23,5 @@ export const lessonCreateValidation = z.object({
     message: "Level must be 'easy', 'medium', or 'hard'",
   }),
 })
+
+export const lessonUpdateValidation = lessonCreateValidation.partial()
