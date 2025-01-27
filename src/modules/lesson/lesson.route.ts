@@ -9,7 +9,11 @@ const router = express.Router()
 router.post(
   '/lesson/create',
   validateRequest(lessonCreateValidation),
-  LessonController.create,
+  LessonController.createLesson,
 )
+
+router.get('/lessons', LessonController.readAllLessons)
+
+router.delete('/lesson/:id', LessonController.deleteLesson)
 
 export const LessonRoute = router

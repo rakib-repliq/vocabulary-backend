@@ -6,6 +6,18 @@ const createLessonIntoDB = async (payload: TLesson) => {
   return lesson
 }
 
+const readAllLessonsFromDB = async () => {
+  const lessons = await Lesson.find()
+  return lessons
+}
+
+const deleteLessonFromDB = async (id: string) => {
+  const lesson = await Lesson.findByIdAndDelete(id)
+  return lesson
+}
+
 export const LessonService = {
-  create: createLessonIntoDB,
+  createLesson: createLessonIntoDB,
+  readAllLesson: readAllLessonsFromDB,
+  deleteLesson: deleteLessonFromDB,
 }
