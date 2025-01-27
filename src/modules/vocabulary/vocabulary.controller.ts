@@ -26,7 +26,34 @@ const readAllVocabulary = catchAsync(async (req, res) => {
   })
 })
 
+const updateVocabulary = catchAsync(async (req, res) => {
+  const vocabulary = await vocabularyService.updateVocabulary(
+    req.params.id,
+    req.body,
+  )
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Vocabulary updated successfully',
+    data: vocabulary,
+  })
+})
+
+const deleteVocabulary = catchAsync(async (req, res) => {
+  const result = await vocabularyService.deleteVocabulary(req.params.id)
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Vocabulary deleted successfully',
+    data: result,
+  })
+})
+
 export const vocabularyController = {
   createVocabulary,
   readAllVocabulary,
+  updateVocabulary,
+  deleteVocabulary,
 }

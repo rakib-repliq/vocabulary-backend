@@ -12,11 +12,9 @@ const stringField = (fieldName: string, minLength: number, maxLength: number) =>
     })
 
 const objectIdField = (fieldName: string) =>
-  z
-    .string()
-    .refine((val) => mongoose.Types.ObjectId.isValid(val), {
-      message: `${fieldName} must be a valid ObjectId`,
-    })
+  z.string().refine((val) => mongoose.Types.ObjectId.isValid(val), {
+    message: `${fieldName} must be a valid ObjectId`,
+  })
 
 export const vocabularyCreateValidation = z.object({
   word: stringField('Word', 1, 255),
@@ -26,3 +24,5 @@ export const vocabularyCreateValidation = z.object({
   lessonId: objectIdField('Lesson ID'),
   adminEmail: objectIdField('Admin Email'),
 })
+
+export const vocabularyUpdateValidation = vocabularyCreateValidation.partial()
